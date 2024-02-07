@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const incomeSchema = mongoose.Schema(
+const expenseSchema = mongoose.Schema(
   {
     description: {
       type: String,
@@ -14,7 +14,7 @@ const incomeSchema = mongoose.Schema(
     },
     isIncome: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   {
@@ -22,4 +22,4 @@ const incomeSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Income", incomeSchema);
+module.exports = mongoose.model("Expense", expenseSchema);

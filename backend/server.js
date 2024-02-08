@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use("/api/income", require("./routes/Income"));
 app.use("/api/expense", require("./routes/Expense"));
+app.use("/api/users", require("./routes/User"));
 
 app.use(errHandler);
 

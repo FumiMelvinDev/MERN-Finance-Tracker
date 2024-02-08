@@ -5,14 +5,15 @@ const {
   updateExpense,
   deleteExpense,
 } = require("../controllers/ExpenseController");
+const { protect } = require("../middleware/authMiddleware");
 const router = express.Router();
 
-router.get("/", getExpenses);
+router.get("/", protect, getExpenses);
 
-router.post("/", addExpense);
+router.post("/", protect, addExpense);
 
-router.put("/:id", updateExpense);
+router.put("/:id", protect, updateExpense);
 
-router.delete("/:id", deleteExpense);
+router.delete("/:id", protect, deleteExpense);
 
 module.exports = router;

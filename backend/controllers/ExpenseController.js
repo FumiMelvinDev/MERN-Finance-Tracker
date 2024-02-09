@@ -41,14 +41,12 @@ const updateExpense = asyncHandler(async (req, res) => {
     throw new Error("Expense not found");
   }
 
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("user not found");
   }
 
-  if (expense.user.toString() !== user.id) {
+  if (expense.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("user not authorized");
   }
@@ -72,14 +70,12 @@ const deleteExpense = asyncHandler(async (req, res) => {
     throw new Error("Expense not found");
   }
 
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error("user not found");
   }
 
-  if (expense.user.toString() !== user.id) {
+  if (expense.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("user not authorized");
   }

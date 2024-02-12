@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../features/auth/authSlice";
+import { Blocks } from "react-loader-spinner";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -9,17 +13,57 @@ function Login() {
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
 
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     }));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
   };
+
+  if (isLoading) {
+    return (
+      <Blocks
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{}}
+        wrapperClass="blocks-wrapper"
+        visible={true}
+      />
+    );
+  }
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

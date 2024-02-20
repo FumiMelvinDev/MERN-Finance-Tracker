@@ -32,7 +32,7 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className=" bg-green-700">
+    <Disclosure as="nav" className=" bg-[#14453D]">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -74,13 +74,6 @@ export default function Navbar() {
                             {item.name}
                           </Link>
                         ))}
-                        <button
-                          onClick={onLogout}
-                          className="text-gray-300 hover:bg-gray-700 hover:text-white
-                              rounded-md px-3 py-2 text-sm font-medium"
-                        >
-                          Logout
-                        </button>
                       </>
                     ) : (
                       <>
@@ -106,8 +99,15 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-4">
                 <div>{user && user.name}</div>
+                <button
+                  onClick={onLogout}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white
+                              rounded-md px-3 py-2 text-sm font-medium bg-red-900"
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@ export default function Navbar() {
                   <button
                     onClick={onLogout}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white
-                              rounded-md px-3 py-2 text-sm font-medium"
+                              rounded-md px-3 py-2 text-sm font-medium bg-red-900"
                   >
                     Logout
                   </button>

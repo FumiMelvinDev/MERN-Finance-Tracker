@@ -1,21 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import incomeService from "./incomeService";
+import expenseService from "./expenseService";
 
 const initialState = {
-  incomes: [],
+  expenses: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
 
-// add income
-export const addIncome = createAsyncThunk(
-  "incomes/add",
-  async (incomeData, thunkAPI) => {
+// add expense
+export const addExpense = createAsyncThunk(
+  "expenses/add",
+  async (expenseData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await incomeService.addIncome(incomeData, token);
+      return await expenseService.addExpense(expenseData, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -29,13 +29,13 @@ export const addIncome = createAsyncThunk(
   }
 );
 
-// get incomes
-export const getIncome = createAsyncThunk(
-  "incomes/getAll",
+// get expenses
+export const getExpenses = createAsyncThunk(
+  "expenses/getAll",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await incomeService.getIncome(token);
+      return await expenseService.getExpenses(token);
     } catch (error) {
       const message =
         (error.response &&
@@ -49,38 +49,38 @@ export const getIncome = createAsyncThunk(
   }
 );
 
-export const incomeSlice = createSlice({
-  name: "income",
+export const expenseSlice = createSlice({
+  name: "expense",
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      //   add income
-      .addCase(addIncome.pending, (state) => {
+      //   add Expense
+      .addCase(addExpense.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addIncome.fulfilled, (state, action) => {
+      .addCase(addExpense.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.incomes.push(action.payload);
+        state.expenses.push(action.payload);
       })
-      .addCase(addIncome.rejected, (state, action) => {
+      .addCase(addExpense.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      //   get income
-      .addCase(getIncome.pending, (state) => {
+      //   get Expenses
+      .addCase(getExpenses.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getIncome.fulfilled, (state, action) => {
+      .addCase(getExpenses.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.incomes = action.payload;
+        state.expenses = action.payload;
       })
-      .addCase(getIncome.rejected, (state, action) => {
+      .addCase(getExpenses.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -88,6 +88,6 @@ export const incomeSlice = createSlice({
   },
 });
 
-export const { reset } = incomeSlice.actions;
+export const { reset } = expenseSlice.actions;
 
-export default incomeSlice.reducer;
+export default expenseSlice.reducer;

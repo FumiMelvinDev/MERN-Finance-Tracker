@@ -100,14 +100,20 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-4">
-                <div>{user && user.name}</div>
-                <button
-                  onClick={onLogout}
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white
+                {user ? (
+                  <>
+                    <div>{user && user.name}</div>
+                    <button
+                      onClick={onLogout}
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white
                               rounded-md px-3 py-2 text-sm font-medium bg-red-900"
-                >
-                  Logout
-                </button>
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
           </div>

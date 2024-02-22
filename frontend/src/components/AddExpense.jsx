@@ -32,20 +32,6 @@ function AddExpense() {
     dispatch(addExpense(expenseData));
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <Blocks
-  //       height="80"
-  //       width="80"
-  //       color="#4fa94d"
-  //       ariaLabel="blocks-loading"
-  //       wrapperStyle={{}}
-  //       wrapperClass="blocks-wrapper"
-  //       visible={true}
-  //     />
-  //   );
-  // }
-
   return (
     <div>
       <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">

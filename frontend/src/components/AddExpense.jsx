@@ -30,6 +30,10 @@ function AddExpense() {
     };
 
     dispatch(addExpense(expenseData));
+    setFormData({
+      description: "",
+      amount: "",
+    });
   };
 
   return (
